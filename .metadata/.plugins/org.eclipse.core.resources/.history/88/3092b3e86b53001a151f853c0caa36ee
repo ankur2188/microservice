@@ -1,0 +1,39 @@
+package com.uzio.wcn;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+
+@RestController
+public class EmployeeController {
+	
+	@Autowired
+	private EmployeeService employeeService;
+
+	@RequestMapping(value = "/employee/{id}")
+	@HystrixCommand(fallbackMethod = "fallBackGetEmployee")
+	public Employee getEmployee(@PathVariable("id") String id) {
+		if(id.equalsIgnoreCase("2")) {
+			throw new RuntimeException();
+		}
+		return new Employee(1, "Ankur", "Engg");
+	}
+	
+	public Employee fallBackGetEmployee(String id) {
+		return new Employee(2, "Ankur FallBack", "Engg FallBack");
+	}
+	
+	@RequestMapping(value = "/employeeFeign/{id}")
+	public Employee getEmployeeFeign(@PathVariable("id") String id) {
+		if (id.equalsIgnoreCase(" ")) {
+			return employeeService.getEmployeeNull();
+		} else if (id == 2) {
+			
+		}
+		
+		return new Employee(Integer.valueOf(id), "Ankur Feign", "Engg Feign");
+	}
+}

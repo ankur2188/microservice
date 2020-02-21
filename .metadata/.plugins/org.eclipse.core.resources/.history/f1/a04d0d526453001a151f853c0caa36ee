@@ -1,0 +1,4 @@
+zuul.routes.producer.url=http://localhost:8081
+eureka.client.serviceUrl.defaultZone=http://localhost:8761/eureka
+server.port=8079
+spring.application.name=api-gateway

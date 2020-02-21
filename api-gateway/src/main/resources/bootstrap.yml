@@ -1,0 +1,25 @@
+server:
+    port: 8079
+    servlet:
+        contextPath: /apigateway
+spring:
+  application:
+    name: apiGateway
+  cloud:
+    config:
+      uri: http://localhost:8191
+      profile: dev
+zuul:
+  routes:
+     ui:
+      url: http://localhost:8081
+logging:
+  file:
+    path: /var/log
+
+
+
+
+
+
+    

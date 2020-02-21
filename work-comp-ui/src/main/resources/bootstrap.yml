@@ -1,0 +1,13 @@
+server:
+  port: 8082
+  servlet:
+     contextPath: /workcompui
+spring:
+  application:
+    name: workCompUI
+  cloud:
+    config:
+      uri: http://localhost:8191
+logging:
+  file:
+    path: /var/log
